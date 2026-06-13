@@ -248,6 +248,53 @@
     }
     .video-note i { color: var(--accent); }
 
+    /* ---------- Qualitative comparison videos ---------- */
+    .demo-wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 720px) { .demo-wrap { grid-template-columns: 1fr; } }
+    .demo-group { margin-top: 0; }
+    .demo-group-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-size: 1.18rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 1.1rem;
+    }
+    .demo-group-title i { color: var(--accent); margin-right: 0.4rem; }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.1rem;
+    }
+    .demo-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+    }
+    .demo-item video { display: block; width: 100%; background: #000; }
+    .demo-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-top: 1px solid var(--line);
+    }
+    .demo-label.sim { color: var(--accent-dark); background: #eef4fb; }
+    .demo-label.real { color: #92400e; background: #fdf6ec; }
+
     /* ---------- Highlight cards ---------- */
     .highlight-grid {
       display: grid;
@@ -462,7 +509,7 @@
     <div class="container content-narrow">
       <h2 class="section-title">Video</h2>
       <div class="video-wrap media-70">
-        <video controls autoplay muted loop playsinline preload="metadata" poster="images/lnp.jpg">
+        <video controls autoplay muted loop playsinline preload="metadata" poster="images/lnp.png">
           <source src="images/ppt.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -505,7 +552,7 @@
   <section class="section">
     <div class="container content-narrow">
       <figure class="media-70">
-        <img class="fig-img" src="images/lnp.jpg" alt="LNP overview: architecture, training in simulation, real-world deployment, and performance.">
+        <img class="fig-img" src="images/lnp.png" alt="LNP overview: architecture, training in simulation, real-world deployment, and performance.">
         <figcaption>
           <b>Overview of LNP.</b> A time-conditioned hybrid-memory recurrent policy couples a long-horizon
           <b>LSTM branch</b> with a fast <b>liquid recurrent branch</b> through a time-aware gate parameterized by the
@@ -654,8 +701,62 @@
     </div>
   </section>
 
-  <!-- ===================== LATENCY ROBUSTNESS ===================== -->
+  <!-- ===================== QUALITATIVE: SIM vs REAL ===================== -->
   <section class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">Simulation vs. Real-World</h2>
+      <p class="abstract-text content-narrow" style="margin-bottom:1.6rem;">
+        Side-by-side qualitative comparison of LNP in large-scale parallel simulation (IsaacLab) and deployed
+        zero-shot on the real humanoid. For both the jump-forward and fast-walk tasks, the real-world rollout
+        closely matches the reference motion produced in simulation, illustrating reliable sim-to-real transfer.
+      </p>
+
+      <div class="demo-wrap">
+        <div class="demo-group">
+          <h3 class="demo-group-title"><i class="fas fa-person-running"></i>Jump-Forward</h3>
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <video controls autoplay muted loop playsinline preload="metadata">
+                <source src="images/Jump_sim.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption class="demo-label sim"><i class="fas fa-cube"></i> Simulation</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <video controls autoplay muted loop playsinline preload="metadata">
+                <source src="images/Jump_real.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption class="demo-label real"><i class="fas fa-robot"></i> Real-World</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="demo-group">
+          <h3 class="demo-group-title"><i class="fas fa-shoe-prints"></i>Fast Walk</h3>
+          <div class="demo-grid">
+            <figure class="demo-item">
+              <video controls autoplay muted loop playsinline preload="metadata">
+                <source src="images/Walk_sim.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption class="demo-label sim"><i class="fas fa-cube"></i> Simulation</figcaption>
+            </figure>
+            <figure class="demo-item">
+              <video controls autoplay muted loop playsinline preload="metadata">
+                <source src="images/Walk_real.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <figcaption class="demo-label real"><i class="fas fa-robot"></i> Real-World</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LATENCY ROBUSTNESS ===================== -->
+  <section class="section">
     <div class="container content-narrow">
       <h2 class="section-title">Robustness to Observation Latency</h2>
       <p class="abstract-text">
@@ -685,7 +786,7 @@
   </section>
 
   <!-- ===================== CONCLUSION ===================== -->
-  <section class="section">
+  <section class="section alt-bg">
     <div class="container content-narrow">
       <h2 class="section-title">Conclusion</h2>
       <p class="abstract-text">
@@ -700,7 +801,7 @@
   </section>
 
   <!-- ===================== BIBTEX ===================== -->
-  <section class="section alt-bg">
+  <section class="section">
     <div class="container content-narrow">
       <h2 class="section-title">BibTeX</h2>
       <pre class="bibtex">@inproceedings{lnp_anonymous,
